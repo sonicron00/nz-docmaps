@@ -30,7 +30,7 @@ class DocApiService
 
     public function getAllAssets(string $assetType): Collection
     {
-        return collect(json_decode($this->client->get($assetType))->getBody()->getContents());
+        return collect(json_decode($this->client->get($assetType)->getBody()->getContents()));
     }
 
 

@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 use App\Models\Campsite;
 use App\Repositories\Contracts\CampsiteRepositoryContract;
+use App\Repositories\BaseRepository;
 
 
 class CampsiteRepository extends BaseRepository implements CampsiteRepositoryContract
@@ -12,11 +13,8 @@ class CampsiteRepository extends BaseRepository implements CampsiteRepositoryCon
     public function __construct(Campsite $model)
     {
         parent::__construct($model);
+        $this->model = $model;
     }
 
-    public function updateOrCreate(array $campsite): void
-    {
-        $this->model->updateOrCreate($campsite);
-    }
 
 }

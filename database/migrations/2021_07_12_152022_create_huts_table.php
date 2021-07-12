@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCampsitesTable extends Migration
+class CreateHutsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCampsitesTable extends Migration
      */
     public function up()
     {
-        Schema::create('campsites', function (Blueprint $table) {
+        Schema::create('huts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->integer('assetId');
@@ -22,7 +22,6 @@ class CreateCampsitesTable extends Migration
             $table->string('region')->nullable();
             $table->integer('x');
             $table->integer('y');
-
         });
     }
 
@@ -33,6 +32,6 @@ class CreateCampsitesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('campsites');
+        Schema::dropIfExists('huts');
     }
 }

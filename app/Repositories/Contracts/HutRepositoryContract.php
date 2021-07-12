@@ -3,7 +3,7 @@
 namespace App\Repositories\Contracts;
 
 
-interface CampsiteRepositoryContract
+interface HutRepositoryContract
 {
 
 

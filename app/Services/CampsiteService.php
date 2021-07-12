@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class CampsiteService
 {
-    protected CampsiteRepositoryContract $campsiteRepositoryContract;
+    public CampsiteRepositoryContract $campsiteRepositoryContract;
     protected DocApiService $docApiService;
 
     public function __construct(CampsiteRepositoryContract $campsiteRepositoryContract, DocApiService $docApiService)
@@ -20,7 +20,7 @@ class CampsiteService
 
     public function upsertAllByAssetId()
     {
-        $campsitesCollect = $this->docApiService->getAllAssets('campsite');
+        $campsitesCollect = $this->docApiService->getAllAssets('campsites');
         $campsitesCollect->each(
             function ($campsiteData) {
                 $campsite = [
@@ -31,6 +31,7 @@ class CampsiteService
                     'x' => $campsiteData->x,
                     'y' => $campsiteData->y
                 ];
+
                 $this->campsiteRepositoryContract->updateOrCreate($campsite);
             }
         );
