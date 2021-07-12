@@ -13,7 +13,10 @@
                             <i class="zmdi zmdi-search"></i>
                         </button>
                     </form>
+                <!--    <img src="{{URL::asset('/images/signs.png')}}"> -->
                 </div>
+
             </div>
         </div>
     </header>
+</div>
