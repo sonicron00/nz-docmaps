@@ -11,11 +11,13 @@ class HutService
 {
     public hutRepositoryContract $hutRepositoryContract;
     protected DocApiService $docApiService;
+    protected SpatialService $spatialService;
 
-    public function __construct(hutRepositoryContract $hutRepositoryContract, DocApiService $docApiService)
+    public function __construct(hutRepositoryContract $hutRepositoryContract, DocApiService $docApiService, SpatialService $spatialService)
     {
         $this->hutRepositoryContract = $hutRepositoryContract;
         $this->docApiService = $docApiService;
+        $this->spatialService = $spatialService;
     }
 
     public function upsertAllByAssetId()
@@ -23,13 +25,14 @@ class HutService
         $hutsCollect = $this->docApiService->getAllAssets('huts');
         $hutsCollect->each(
             function ($hutData) {
+                $translatedCoordinates = $this->spatialService->convert($hutData->x, $hutData->y);
                 $hut = [
                     'assetId' => $hutData->assetId,
                     'name' => $hutData->name,
                     'status' => $hutData->status,
                     'region' => $hutData->region,
-                    'x' => $hutData->x,
-                    'y' => $hutData->y
+                    'x' => $translatedCoordinates['latitude'],
+                    'y' => $translatedCoordinates['longitude']
                 ];
 
                 $this->hutRepositoryContract->updateOrCreate($hut);
