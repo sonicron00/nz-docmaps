@@ -20,8 +20,8 @@ class CreateCampsitesTable extends Migration
             $table->string('name');
             $table->string('status');
             $table->string('region')->nullable();
-            $table->integer('x');
-            $table->integer('y');
+            $table->float('x');
+            $table->float('y');
 
         });
     }

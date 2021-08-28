@@ -11,11 +11,13 @@ class CampsiteService
 {
     public CampsiteRepositoryContract $campsiteRepositoryContract;
     protected DocApiService $docApiService;
+    protected SpatialService $spatialService;
 
-    public function __construct(CampsiteRepositoryContract $campsiteRepositoryContract, DocApiService $docApiService)
+    public function __construct(CampsiteRepositoryContract $campsiteRepositoryContract, DocApiService $docApiService, SpatialService $spatialService)
     {
         $this->campsiteRepositoryContract = $campsiteRepositoryContract;
         $this->docApiService = $docApiService;
+        $this->spatialService = $spatialService;
     }
 
     public function upsertAllByAssetId()
@@ -23,13 +25,14 @@ class CampsiteService
         $campsitesCollect = $this->docApiService->getAllAssets('campsites');
         $campsitesCollect->each(
             function ($campsiteData) {
+                $translatedCoordinates = $this->spatialService->convert($campsiteData->x, $campsiteData->y);
                 $campsite = [
                     'assetId' => $campsiteData->assetId,
                     'name' => $campsiteData->name,
                     'status' => $campsiteData->status,
                     'region' => $campsiteData->region,
-                    'x' => $campsiteData->x,
-                    'y' => $campsiteData->y
+                    'x' => $translatedCoordinates['latitude'],
+                    'y' => $translatedCoordinates['longitude']
                 ];
 
                 $this->campsiteRepositoryContract->updateOrCreate($campsite);
