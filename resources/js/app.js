@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+import 'leaflet/dist/leaflet.css';
 
 window.Vue = require('vue').default;
 
