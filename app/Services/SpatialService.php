@@ -9,7 +9,6 @@ class SpatialService
     function convert(int $x, int $y): array {
         $a = 6378137;
         $f = 1 / 298.257222101;
-        $phizero = 0;
         $lambdazero = 173;
         $Nzero = 10000000;
         $Ezero = 1600000;
@@ -18,10 +17,6 @@ class SpatialService
         $E  = $x;
         $b = $a * (1 - $f);
         $esq = 2 * $f - pow($f,2);
-        $Z0 = 1 - $esq / 4 - 3 * pow($esq, 2) / 64 - 5 * pow($esq, 3) / 256;
-        $A2 = 0.375 * ($esq + pow($esq, 2) / 4 + 15 * pow($esq, 3) / 128);
-        $A4 = 15 * (pow($esq, 2) + 3 * pow($esq, 2) / 4) / 256;
-        $A6 = 35 * pow($esq, 3) / 3072;
         $Nprime = $N - $Nzero;
         $mprime = $Nprime / $kzero;
         $smn = ($a - $b) / ($a + $b);
