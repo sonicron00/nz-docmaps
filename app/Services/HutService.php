@@ -13,8 +13,11 @@ class HutService
     protected DocApiService $docApiService;
     protected SpatialService $spatialService;
 
-    public function __construct(hutRepositoryContract $hutRepositoryContract, DocApiService $docApiService, SpatialService $spatialService)
-    {
+    public function __construct(
+        hutRepositoryContract $hutRepositoryContract,
+        DocApiService $docApiService,
+        SpatialService $spatialService
+    ) {
         $this->hutRepositoryContract = $hutRepositoryContract;
         $this->docApiService = $docApiService;
         $this->spatialService = $spatialService;
@@ -38,6 +41,11 @@ class HutService
                 $this->hutRepositoryContract->updateOrCreate($hut);
             }
         );
+    }
+
+    public function getHuts()
+    {
+        return $this->hutRepositoryContract->getAll();
     }
 
 }

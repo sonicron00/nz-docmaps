@@ -16,4 +16,8 @@ class HutRepository extends BaseRepository implements HutRepositoryContract
         $this->model = $model;
     }
 
+    public function getAll() {
+        return Hut::all();
+    }
+
 }

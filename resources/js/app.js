@@ -6,6 +6,8 @@
 
 require('./bootstrap');
 import 'leaflet/dist/leaflet.css';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
 window.Vue = require('vue').default;
 
@@ -30,4 +32,6 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    axios,
+    VueAxios
 });
